@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delos Engineering Data Input</title>
+  <meta name="description" content="Pasang EDI (Delos Engineering Data Input) di HP atau laptop.">
+  <meta name="theme-color" content="#0b1b33">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="edi-app-icon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Delos EDI">
+  <link rel="stylesheet" href="launcher.css">
+  <script src="launcher.js" defer></script>
+</head>
+<body>
+  <!--
+    Launcher for the EDI web app (Google Apps Script cannot be installed itself: the page the browser opens
+    belongs to Google, so it can carry no manifest). Opened from the installed app it goes straight to EDI;
+    opened in a browser tab it offers to install.
+  -->
+  <main class="launcher">
+    <img class="icon" src="edi-app-icon-512.png" alt="" width="112" height="112">
+    <h1>Delos Engineering Data Input</h1>
+
+    <div class="opening" role="status">
+      <svg class="gears" viewBox="7 8 42 42" aria-hidden="true">
+        <g class="gear gear-big">
+          <circle cx="22" cy="34" r="12.4141" stroke-width="3" stroke-dasharray="2.6 3.9" stroke-dashoffset="3.467"/>
+          <circle cx="22" cy="34" r="7.95" stroke-width="6.9"/>
+        </g>
+        <g class="gear gear-small">
+          <circle cx="38.16" cy="20.44" r="8.2761" stroke-width="3" stroke-dasharray="2.6 3.9" stroke-dashoffset="3.828"/>
+          <circle cx="38.16" cy="20.44" r="5.1" stroke-width="4.2"/>
+        </g>
+      </svg>
+      <p>Membuka EDI…</p>
+    </div>
+
+    <div class="install">
+      <button type="button" class="btn btn-primary" id="install-btn" hidden>Pasang aplikasi</button>
+      <!-- The one place the app's address is written; launcher.js reads it from here. -->
+      <a class="btn" id="open-app"
+         href="https://script.google.com/a/macros/delosaqua.com/s/AKfycbzOuNM98HIbEKul2jP3rvblCeT0SmuRiq0fKQ53Glpt-xYdLjS0mlPQ0FC8DMgMb6YSaQ/exec">Buka EDI</a>
+
+      <section class="help" id="help-android">
+        <h2>Pasang di HP Android</h2>
+        <p>Tekan <strong>Pasang aplikasi</strong>. Kalau tombolnya tidak muncul: menu <strong>⋮</strong> di Chrome →
+          <strong>Instal aplikasi</strong> (atau <strong>Tambahkan ke layar utama</strong> → <strong>Instal</strong>).</p>
+      </section>
+      <section class="help" id="help-ios" hidden>
+        <h2>Pasang di iPhone</h2>
+        <p>Buka halaman ini di <strong>Safari</strong>, tekan <strong>Bagikan</strong> (kotak dengan panah ke atas),
+          lalu <strong>Tambah ke Layar Utama</strong>.</p>
+      </section>
+      <p class="note">Masuk dengan akun Google <strong>@delosaqua.com</strong> yang terdaftar.</p>
+    </div>
+  </main>
+</body>
+</html>
