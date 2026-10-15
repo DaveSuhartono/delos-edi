@@ -1,4 +1,4 @@
-/* EDI launcher: one centred column on the icon's navy. */
+/* EDI launcher: one centred column on the icon's navy (EDI Beta's copy recolours it orange with beta.css). */
 :root {
   --bg: #0b1b33;
   --surface: #13284a;
@@ -7,8 +7,7 @@
   --muted: #a9bccf;
   --primary: #1f5fbf;
   --primary-hover: #184c99;
-  --gear-big: #6ea4f2;
-  --gear-small: #6cbab4;
+  --accent: #6cbab4;
   color-scheme: dark;
 }
 
@@ -38,17 +37,14 @@ body {
 
 h1 { margin: 0; font-size: 22px; line-height: 1.3; font-weight: 700; }
 
-/* Opened from the installed app: only the gears show while it moves on to EDI. */
-.opening { display: none; flex-direction: column; align-items: center; gap: 8px; color: var(--muted); }
+/* Opened from the installed app: only the icon, and under it a bar with an estimated percentage, while it moves
+   on to EDI (launcher.js). */
+.opening { display: none; width: min(240px, 100%); flex-direction: column; gap: 10px; color: var(--muted); }
 .launching .opening { display: flex; }
-.launching .install { display: none; }
-.opening p { margin: 0; }
-
-.gears { width: 72px; height: 72px; }
-.gear { fill: none; transform-box: fill-box; transform-origin: center; }
-.gear-big { stroke: var(--gear-big); animation: spin 2.4s linear infinite; }
-.gear-small { stroke: var(--gear-small); animation: spin 1.6s linear infinite reverse; }
-@keyframes spin { to { transform: rotate(360deg); } }
+.launching h1, .launching .install { display: none; }
+.opening p { margin: 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+.open-bar { height: 6px; overflow: hidden; border-radius: 999px; background: var(--border); }
+.open-bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--accent); }
 
 .install { width: 100%; display: flex; flex-direction: column; gap: 12px; }
 
@@ -69,7 +65,7 @@ h1 { margin: 0; font-size: 22px; line-height: 1.3; font-weight: 700; }
 }
 .btn-primary { border-color: var(--primary); background: var(--primary); color: #fff; }
 .btn-primary:hover { background: var(--primary-hover); }
-.btn:focus-visible { outline: 3px solid var(--gear-small); outline-offset: 2px; }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
 .help {
   margin-top: 8px;
@@ -83,8 +79,3 @@ h1 { margin: 0; font-size: 22px; line-height: 1.3; font-weight: 700; }
 .help strong, .note strong { color: var(--text); }
 
 [hidden] { display: none !important; }
-
-@media (prefers-reduced-motion: reduce) {
-  .gear-big { animation-duration: 7.2s; }
-  .gear-small { animation-duration: 4.8s; }
-}

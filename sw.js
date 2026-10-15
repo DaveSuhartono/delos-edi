@@ -3,7 +3,7 @@
  * without a signal; EDI itself (script.google.com) is never cached and always loads live.
  * Change CACHE when the launcher's files change, so phones drop the old copy.
  */
-const CACHE = 'edi-launcher-v2'; // v2: icons with the Delos waves traced from the original logo
+const CACHE = 'edi-launcher-v3'; // v3: the opening bar with a percentage instead of the gears
 const FILES = ['./', 'index.html', 'launcher.css', 'launcher.js', 'manifest.webmanifest',
   'edi-app-icon.png', 'edi-app-icon-512.png'];
 

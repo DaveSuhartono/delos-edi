@@ -1,8 +1,13 @@
 /**
- * Opened as the installed app: go straight to EDI (the address is the "Buka EDI" link's).
+ * Opened as the installed app: go straight to EDI (the address is the "Buka EDI" link's), with a bar and an
+ * estimated percentage under the icon until EDI's page replaces this one.
  * Opened in a browser tab: offer to install, with the steps for Android and iPhone.
  */
 (() => {
+  // Google's page reports no progress, so the bar estimates it: fast at first, slowing towards 95%, until EDI
+  // replaces this page (about 60% after 2 s, 90% after 6 s).
+  const OPEN_TIME_MS = 2500;
+  const OPEN_MAX_PERCENT = 95;
   const appUrl = document.getElementById('open-app').href;
   const installed = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 
@@ -11,6 +16,7 @@
 
   if (installed) {
     document.body.classList.add('launching');
+    showProgress();
     location.replace(appUrl);
     return;
   }
@@ -35,4 +41,17 @@
     installButton.hidden = true;
   });
   window.addEventListener('appinstalled', () => { installButton.hidden = true; });
+
+  function showProgress() {
+    const fill = document.getElementById('open-fill');
+    const label = document.getElementById('open-percent');
+    const start = performance.now();
+    const step = now => {
+      const percent = Math.round(OPEN_MAX_PERCENT * (1 - Math.exp(-(now - start) / OPEN_TIME_MS)));
+      fill.style.width = `${percent}%`;
+      label.textContent = `${percent}%`;
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
 })();
